@@ -9,11 +9,9 @@ export enum ThemeMode {
 }
 
 const useTheme = () => {
-  const [mode, setMode] = useState<ThemeMode>(ThemeMode.Light);
-
   const defaultTheme = createMuiTheme({
     palette: {
-      type: mode,
+      type: ThemeMode.Light,
       primary: {
         main: themeVariables.colors.blue,
       },
@@ -33,14 +31,10 @@ const useTheme = () => {
   const [muiTheme, setMuiTheme] = useState<Theme>(defaultTheme);
 
   const setTheme = (theme: Theme) => setMuiTheme(theme);
-  const setThemeMode = (themeMode: ThemeMode) => setMode(themeMode);
 
   return {
     theme: muiTheme,
     setTheme,
-    themeMode: mode,
-    setThemeMode,
-    ThemeMode,
   };
 };
 

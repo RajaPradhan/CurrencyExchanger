@@ -1,8 +1,6 @@
 import React from 'react';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
 
-import ThemeModeSwitcher from '../ThemeModeSwitcher';
-
 const useStyles = makeStyles(() => ({
   headerContainer: {
     display: 'flex',
@@ -26,9 +24,6 @@ const Header = () => {
         <Typography variant="h1" color="textPrimary">
           Exchange
         </Typography>
-      </Grid>
-      <Grid item xs={6} className={classes.themeModeSwitcherContainer}>
-        <ThemeModeSwitcher />
       </Grid>
     </Grid>
   );
