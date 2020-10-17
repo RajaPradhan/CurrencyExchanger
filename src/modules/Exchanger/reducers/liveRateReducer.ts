@@ -1,4 +1,8 @@
-import { LiveRateState, LiveRateAction, LiveRateActionType } from '../types';
+import {
+  LiveRateState,
+  LiveRateAction,
+  LiveRateActionType,
+} from '../types/liveRateTypes';
 
 const state: LiveRateState = {
   data: null,

@@ -15,7 +15,7 @@ import {
   useLiveRateContext,
   useLiveRateDispatch,
   fetchLiveRate,
-} from './providers/ExchangeProvider';
+} from './providers/LiveRateProvider';
 import { Currency } from '../../shared/types';
 import { ExchangeItemType } from '../../shared/components/ExchangeItem/types';
 import {
