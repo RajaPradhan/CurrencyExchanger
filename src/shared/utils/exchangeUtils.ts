@@ -16,7 +16,6 @@ export const calculateExchangeRate = (
   }
   const sourceRate = rates[sourceCurrency];
   const destinationRate = rates[destinationCurrency];
-  console.log(sourceCurrency, destinationCurrency, sourceRate, destinationRate);
   if (!sourceRate || !destinationRate) {
     return -1;
   }
