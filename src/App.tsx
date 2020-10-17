@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from '@material-ui/core';
 
-import { theme, ThemeMode } from './shared/theme';
-import Layout from './shared/Layout';
+import { useTheme } from './shared/theme';
+import Layout from './shared/components/Layout';
+import Header from './shared/components/Header';
+import Exchanger from './modules/Exchanger';
+import { ExchangeProvider } from './modules/Exchanger/providers/ExchangeProvider';
 
 function App() {
-  const [themeMode, setThemeMode] = useState<ThemeMode>(ThemeMode.Light);
+  const { theme } = useTheme();
 
   return (
-    <ThemeProvider theme={theme(themeMode)}>
+    <ThemeProvider theme={theme}>
       <Layout>
-        <div></div>
+        <Header />
+        <ExchangeProvider>
+          <Exchanger />
+        </ExchangeProvider>
       </Layout>
     </ThemeProvider>
   );
