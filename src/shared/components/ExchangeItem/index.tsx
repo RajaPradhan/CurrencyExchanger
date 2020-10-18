@@ -101,7 +101,7 @@ const ExchangeItem = ({
   const handleAmountChange = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {
-    let amountToExchange = value === '' ? 0 : Number(value);
+    let amountToExchange = value === '' ? 0 : ((value as unknown) as number);
     if (
       !isValidTwoDecimalPlaceNumber(amountToExchange) ||
       amountToExchange > MAX_AMOUNT_ALLOWED_TO_EXCHANGE

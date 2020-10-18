@@ -62,7 +62,10 @@ const updateBalance = (
   try {
     const balanceData = context.data;
     balanceData[source.currency] -= source.amount; // subtract from source pocket
-    balanceData[destination.currency] += source.amount * liveRate; // add to destination pocket
+    const tmpBalance = Number(
+      (balanceData[destination.currency] + source.amount * liveRate).toFixed(2),
+    ); // add to destination pocket
+    balanceData[destination.currency] = tmpBalance;
     dispatch({
       type: BalanceActionType.UPDATE_BALANCE_SUCCESS,
       payload: balanceData,
