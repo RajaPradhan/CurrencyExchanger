@@ -22,6 +22,7 @@ const useStyles = makeStyles(() => ({
   },
   liveRateText: {
     color: themeVariables.colors.blue,
+    paddingLeft: '5px',
   },
 }));
 
