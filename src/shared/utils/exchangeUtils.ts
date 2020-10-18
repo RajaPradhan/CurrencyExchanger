@@ -27,7 +27,7 @@ export const calculateExchangeAmount = (
   destinationCurrency: Currency,
   rates: LiveRateData | null,
   amount: number,
-) => {
+): number => {
   const exchangeRate = calculateExchangeRate(
     sourceCurrency,
     destinationCurrency,
@@ -38,3 +38,5 @@ export const calculateExchangeAmount = (
   }
   return Number((amount * exchangeRate).toFixed(2));
 };
+
+export const MAX_AMOUNT_ALLOWED_TO_EXCHANGE = 99999.99;

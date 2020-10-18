@@ -11,7 +11,10 @@ import {
 
 import { themeVariables } from '../../theme';
 import { Currency, CurrencySymbol } from '../../types';
-import { isValidTwoDecimalPlaceNumber } from '../../utils/exchangeUtils';
+import {
+  isValidTwoDecimalPlaceNumber,
+  MAX_AMOUNT_ALLOWED_TO_EXCHANGE,
+} from '../../utils/exchangeUtils';
 
 const useStyles = makeStyles((theme) => ({
   exchangeItemContainer: { padding: '30px 15px' },
@@ -64,6 +67,9 @@ const useStyles = makeStyles((theme) => ({
   balanceText: {
     color: themeVariables.colors.lightGrey,
   },
+  balanceErrorText: {
+    color: themeVariables.colors.pink,
+  },
 }));
 
 type Props = {
@@ -84,9 +90,6 @@ const ExchangeItem = ({
   onAmountChange,
 }: Props) => {
   const classes = useStyles({ type });
-  //   const [currency, setCurrency] = useState<Currency>(
-  //     type === 'source' ? Currency.EUR : Currency.GBP,
-  //   );
 
   const handleCurrencyChange = ({
     target: { value },
@@ -95,11 +98,14 @@ const ExchangeItem = ({
     onCurrencyChange(type, currency);
   };
 
-  const handleAmountToExchangeChange = ({
+  const handleAmountChange = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {
     let amountToExchange = value === '' ? 0 : Number(value);
-    if (!isValidTwoDecimalPlaceNumber(Number(amountToExchange))) {
+    if (
+      !isValidTwoDecimalPlaceNumber(amountToExchange) ||
+      amountToExchange > MAX_AMOUNT_ALLOWED_TO_EXCHANGE
+    ) {
       return;
     }
     onAmountChange(type, amountToExchange);
@@ -142,7 +148,7 @@ const ExchangeItem = ({
             placeholder="0"
             className={classes.amountInputField}
             value={amount === 0 ? '' : amount}
-            onChange={handleAmountToExchangeChange}
+            onChange={handleAmountChange}
           />
         </Grid>
       </Grid>
@@ -150,7 +156,11 @@ const ExchangeItem = ({
         <Grid item>
           <Typography
             variant="body1"
-            className={classes.balanceText}
+            className={
+              type === 'source' && amount > balance
+                ? classes.balanceErrorText
+                : classes.balanceText
+            }
           >{`Balance: ${balance} ${CurrencySymbol[currency]}`}</Typography>
         </Grid>
       </Grid>
