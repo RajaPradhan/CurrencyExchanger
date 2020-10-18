@@ -16,11 +16,17 @@ import {
   useLiveRateDispatch,
   fetchLiveRate,
 } from './providers/LiveRateProvider';
+import {
+  useBalanceContext,
+  useBalanceDispatch,
+  updateBalance,
+} from './providers/BalanceProvider';
 import { Currency } from '../../shared/types';
 import { ExchangeItemType } from '../../shared/components/ExchangeItem/types';
 import {
   calculateExchangeRate,
   calculateExchangeAmount,
+  isValidExchange,
 } from '../../shared/utils/exchangeUtils';
 
 const useStyles = makeStyles(() => ({
@@ -53,17 +59,23 @@ const useStyles = makeStyles(() => ({
 const Exchanger = () => {
   const LIVE_RATE_FETCH_INTERVAL = 10000;
   const classes = useStyles();
+
   const liveRateContext = useLiveRateContext();
   const liveRateDispatch = useLiveRateDispatch();
+
+  const balanceContext = useBalanceContext();
+  const balanceDispatch = useBalanceDispatch();
 
   const [source, setSource] = useState<ExchangeItemType>({
     currency: Currency.EUR,
     amount: 0,
+    balance: balanceContext.data[Currency.EUR],
   });
 
   const [destination, setDestination] = useState<ExchangeItemType>({
     currency: Currency.GBP,
     amount: 0,
+    balance: balanceContext.data[Currency.GBP],
   });
 
   const [liveRate, setLiveRate] = useState<number | undefined>(undefined);
@@ -130,6 +142,16 @@ const Exchanger = () => {
     setDestination(tmpSource);
   };
 
+  const handleExchange = () => {
+    updateBalance(
+      balanceContext,
+      balanceDispatch,
+      source,
+      destination,
+      liveRate as number,
+    );
+  };
+
   useEffect(() => {
     if (liveRateContext.data) {
       setLiveRate(
@@ -140,7 +162,14 @@ const Exchanger = () => {
         ),
       );
     }
-  }, [source, destination, liveRateContext]);
+    if (balanceContext.data) {
+      setSource({ ...source, balance: balanceContext.data[source.currency] });
+      setDestination({
+        ...destination,
+        balance: balanceContext.data[destination.currency],
+      });
+    }
+  }, [liveRateContext, balanceContext]);
 
   useEffect(() => {
     // fetch rates on first load and then fetch every 10 sec
@@ -164,7 +193,7 @@ const Exchanger = () => {
             <ExchangeItem
               type="source"
               currency={source.currency}
-              balance={1000}
+              balance={source.balance}
               onCurrencyChange={handleCurrencyChange}
               onAmountChange={handleAmountChange}
               amount={source.amount}
@@ -184,14 +213,22 @@ const Exchanger = () => {
             <ExchangeItem
               type="destination"
               currency={destination.currency}
-              balance={1234}
+              balance={destination.balance}
               onCurrencyChange={handleCurrencyChange}
               onAmountChange={handleAmountChange}
               amount={destination.amount}
             />
           </Grid>
           <Grid item xs={12} className={classes.buttonContainer}>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={
+                !isValidExchange(source, destination, liveRateContext.data) ||
+                balanceContext.loading
+              }
+              onClick={handleExchange}
+            >
               <Typography variant="body1">Exchange</Typography>
             </Button>
           </Grid>
