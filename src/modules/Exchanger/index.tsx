@@ -6,11 +6,8 @@ import {
   Typography,
   CircularProgress,
 } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 
-import ExchangeItem from '../../shared/components/ExchangeItem';
-import CurrencySwitcher from '../../shared/components/CurrencySwitcher';
-import LiveRate from '../../shared/components/LiveRate';
-import { themeVariables } from '../../shared/theme';
 import {
   useLiveRateContext,
   useLiveRateDispatch,
@@ -21,8 +18,13 @@ import {
   useBalanceDispatch,
   updateBalance,
 } from './providers/BalanceProvider';
-import { Currency } from '../../shared/types';
+
+import ExchangeItem from '../../shared/components/ExchangeItem';
+import CurrencySwitcher from '../../shared/components/CurrencySwitcher';
+import LiveRate from '../../shared/components/LiveRate';
 import { ExchangeItemType } from '../../shared/components/ExchangeItem/types';
+import { themeVariables } from '../../shared/theme';
+import { Currency } from '../../shared/types';
 import {
   calculateExchangeRate,
   calculateExchangeAmount,
@@ -59,6 +61,7 @@ const useStyles = makeStyles(() => ({
 const Exchanger = () => {
   const LIVE_RATE_FETCH_INTERVAL = 10000;
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
 
   const liveRateContext = useLiveRateContext();
   const liveRateDispatch = useLiveRateDispatch();
@@ -149,6 +152,7 @@ const Exchanger = () => {
       source,
       destination,
       liveRate as number,
+      enqueueSnackbar,
     );
   };
 

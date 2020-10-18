@@ -11,6 +11,11 @@ import {
   state as balanceInitialState,
 } from '../reducers/balanceReducer';
 
+const snackbarOptions = {
+  anchorOrigin: { horizontal: 'center', vertical: 'top' },
+  autoHideDuration: 3000,
+};
+
 type Props = {
   children: ReactNode;
 };
@@ -57,6 +62,7 @@ const updateBalance = (
   source: ExchangeItemType,
   destination: ExchangeItemType,
   liveRate: number,
+  enqueueSnackbar: any,
 ) => {
   dispatch({ type: BalanceActionType.UPDATE_BALANCE_LOADING });
   try {
@@ -70,8 +76,16 @@ const updateBalance = (
       type: BalanceActionType.UPDATE_BALANCE_SUCCESS,
       payload: balanceData,
     });
+    enqueueSnackbar('Successfully exchanged currency', {
+      ...snackbarOptions,
+      variant: 'success',
+    });
   } catch (error) {
     dispatch({ type: BalanceActionType.UPDATE_BALANCE_FAILURE });
+    enqueueSnackbar('Exchange failed. Try again.', {
+      ...snackbarOptions,
+      variant: 'error',
+    });
   }
 };
 
