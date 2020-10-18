@@ -169,16 +169,19 @@ const Exchanger = () => {
       );
     }
     if (balanceContext.data) {
-      setSource({ ...source, balance: balanceContext.data[source.currency] });
-      setDestination({
-        ...destination,
-        balance: balanceContext.data[destination.currency],
-      });
+      setSource((prevState) => ({
+        ...prevState,
+        balance: balanceContext.data[prevState.currency],
+      }));
+      setDestination((prevState) => ({
+        ...prevState,
+        balance: balanceContext.data[prevState.currency],
+      }));
     }
-  }, [liveRateContext, balanceContext]);
+  }, [liveRateContext, balanceContext, source.currency, destination.currency]);
 
   useEffect(() => {
-    // fetch rates on first load and then fetch every 10 sec
+    // fetch rates on first load and then fetch every LIVE_RATE_FETCH_INTERVAL sec
     fetchLiveRate(liveRateDispatch);
     const intervalId = setInterval(
       () => fetchLiveRate(liveRateDispatch),
