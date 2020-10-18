@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 
 import RateIcon from './RateIcon';
@@ -32,16 +32,18 @@ type Props = {
   destinationCurrency: Currency;
 };
 
-const LiveRate = ({ rate, sourceCurrency, destinationCurrency }: Props) => {
-  const classes = useStyles();
-  return (
-    <div className={classes.liveRateContainer}>
-      <RateIcon fill={themeVariables.colors.blue} />
-      <Typography variant="body1" className={classes.liveRateText}>
-        {`1 ${CurrencySymbol[sourceCurrency]} = ${rate} ${CurrencySymbol[destinationCurrency]}`}
-      </Typography>
-    </div>
-  );
-};
+const LiveRate = memo(
+  ({ rate, sourceCurrency, destinationCurrency }: Props) => {
+    const classes = useStyles();
+    return (
+      <div className={classes.liveRateContainer}>
+        <RateIcon fill={themeVariables.colors.blue} />
+        <Typography variant="body1" className={classes.liveRateText}>
+          {`1 ${CurrencySymbol[sourceCurrency]} = ${rate} ${CurrencySymbol[destinationCurrency]}`}
+        </Typography>
+      </div>
+    );
+  },
+);
 
 export default LiveRate;
