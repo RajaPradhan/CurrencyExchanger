@@ -84,10 +84,6 @@ const Exchanger = () => {
   const [liveRate, setLiveRate] = useState<number | undefined>(undefined);
 
   const handleCurrencyChange = (type: string, currency: Currency) => {
-    type === 'source'
-      ? setSource({ ...source, currency })
-      : setDestination({ ...destination, currency });
-
     if (type === 'source') {
       setSource({ ...source, currency });
       setDestination({
