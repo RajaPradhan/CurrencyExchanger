@@ -17,7 +17,6 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    cursor: 'pointer',
     padding: '0 5px',
   },
   liveRateText: {
