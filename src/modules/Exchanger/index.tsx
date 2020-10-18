@@ -154,6 +154,8 @@ const Exchanger = () => {
       liveRate as number,
       enqueueSnackbar,
     );
+    setSource({ ...source, amount: 0 });
+    setDestination({ ...destination, amount: 0 });
   };
 
   useEffect(() => {
