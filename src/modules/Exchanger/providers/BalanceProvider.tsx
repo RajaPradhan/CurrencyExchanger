@@ -62,7 +62,7 @@ const updateBalance = (
   source: ExchangeItemType,
   destination: ExchangeItemType,
   liveRate: number,
-  enqueueSnackbar: any,
+  enqueueSnackbar: Function,
 ) => {
   dispatch({ type: BalanceActionType.UPDATE_BALANCE_LOADING });
   try {
