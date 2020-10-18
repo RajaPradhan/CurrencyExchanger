@@ -146,6 +146,7 @@ const ExchangeItem = ({
           <Input
             type="text"
             placeholder="0"
+            autoFocus={type === 'source'}
             className={classes.amountInputField}
             value={amount === 0 ? '' : amount}
             onChange={handleAmountChange}
