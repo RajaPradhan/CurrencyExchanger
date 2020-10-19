@@ -1,5 +1,8 @@
 import { createMuiTheme, Theme } from '@material-ui/core';
 
+import { ExchangeItemType } from '../components/ExchangeItem/types';
+import { Currency } from '../types';
+
 export const defaultTheme: Theme = createMuiTheme({
   palette: {
     type: 'light',
@@ -24,3 +27,17 @@ export const mockLiveRateData = {
   base: 'EUR',
   date: '2020-10-16',
 };
+
+export const mockSource: ExchangeItemType = {
+  currency: Currency.EUR,
+  amount: 10,
+  balance: 1000,
+};
+
+export const mockDestination: ExchangeItemType = {
+  currency: Currency.GBP,
+  amount: 9.1,
+  balance: 500,
+};
+
+export const liveRate: number = 0.91;
