@@ -16,10 +16,10 @@ const LiveRateConsumer = () => {
 
   return (
     <>
-      <div data-testId="rate-gbp">
+      <div data-testid="rate-gbp">
         {liveRateContext.data ? liveRateContext.data.GBP : ''}
       </div>
-      <div data-testId="rate-usd">
+      <div data-testid="rate-usd">
         {liveRateContext.data ? liveRateContext.data.USD : ''}
       </div>
       <button onClick={handleClick}>Fetch live rate</button>

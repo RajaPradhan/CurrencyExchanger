@@ -31,7 +31,7 @@ const CurrencySwitcher = ({ onClick }: Props) => {
     <div
       className={classes.switcherContainer}
       onClick={onClick}
-      data-testId="currency-switcher"
+      data-testid="currency-switcher"
     >
       <SwitchIcon fill={themeVariables.colors.blue} />
     </div>

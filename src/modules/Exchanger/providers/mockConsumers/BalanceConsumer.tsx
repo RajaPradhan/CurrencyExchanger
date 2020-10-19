@@ -27,8 +27,8 @@ const BalanceConsumer = () => {
 
   return (
     <>
-      <div data-testId="source-balance">{balanceContext.data.EUR}</div>
-      <div data-testId="destination-balance">{balanceContext.data.GBP}</div>
+      <div data-testid="source-balance">{balanceContext.data.EUR}</div>
+      <div data-testid="destination-balance">{balanceContext.data.GBP}</div>
       <button onClick={handleClick}>Exchange</button>
     </>
   );

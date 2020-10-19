@@ -127,7 +127,7 @@ const ExchangeItem = ({
               value={currency}
               onChange={handleCurrencyChange}
               className={classes.select}
-              data-testId={`${dataTestIdPrefix}-currency-selector`}
+              data-testid={`${dataTestIdPrefix}-currency-selector`}
             >
               {Object.values(Currency).map(
                 (currency: string, index: number) => (
@@ -139,7 +139,7 @@ const ExchangeItem = ({
                   >
                     <Typography
                       variant="subtitle1"
-                      data-testId={`${dataTestIdPrefix}-selected-currency-text`}
+                      data-testid={`${dataTestIdPrefix}-selected-currency-text`}
                     >
                       {currency}
                     </Typography>
@@ -185,7 +185,7 @@ const ExchangeItem = ({
                 ? classes.balanceErrorText
                 : classes.balanceText
             }
-            data-testId={`${dataTestIdPrefix}-balance-text`}
+            data-testid={`${dataTestIdPrefix}-balance-text`}
           >{`Balance: ${balance} ${CurrencySymbol[currency]}`}</Typography>
         </Grid>
       </Grid>

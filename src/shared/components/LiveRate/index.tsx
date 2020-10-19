@@ -40,7 +40,7 @@ const LiveRate = memo(
         <Typography
           variant="body1"
           className={classes.liveRateText}
-          data-testId="live-rate"
+          data-testid="live-rate"
         >
           {`1 ${CurrencySymbol[sourceCurrency]} = ${rate} ${CurrencySymbol[destinationCurrency]}`}
         </Typography>

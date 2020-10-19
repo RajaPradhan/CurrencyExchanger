@@ -190,7 +190,7 @@ const Exchanger = () => {
     <Grid container className={classes.mainContentContainer}>
       {!liveRateContext.data && liveRateContext.loading ? (
         <Grid item xs={12} className={classes.loaderContainer}>
-          <CircularProgress data-testId="loading-indicator" />
+          <CircularProgress data-testid="loading-indicator" />
         </Grid>
       ) : (
         <>
@@ -233,7 +233,7 @@ const Exchanger = () => {
                 balanceContext.loading
               }
               onClick={handleExchange}
-              data-testId="exchange-button"
+              data-testid="exchange-button"
             >
               <Typography variant="body1">Exchange</Typography>
             </Button>
