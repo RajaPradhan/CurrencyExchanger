@@ -126,8 +126,8 @@ const Exchanger = () => {
       setSource({
         ...source,
         amount: calculateExchangeAmount(
-          source.currency,
           destination.currency,
+          source.currency,
           liveRateContext.data,
           amount,
         ),
@@ -188,9 +188,9 @@ const Exchanger = () => {
 
   return (
     <Grid container className={classes.mainContentContainer}>
-      {!liveRateContext.data ? (
+      {!liveRateContext.data && liveRateContext.loading ? (
         <Grid item xs={12} className={classes.loaderContainer}>
-          <CircularProgress />
+          <CircularProgress data-testId="loading-indicator" />
         </Grid>
       ) : (
         <>
@@ -233,6 +233,7 @@ const Exchanger = () => {
                 balanceContext.loading
               }
               onClick={handleExchange}
+              data-testId="exchange-button"
             >
               <Typography variant="body1">Exchange</Typography>
             </Button>

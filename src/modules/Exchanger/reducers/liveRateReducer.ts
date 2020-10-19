@@ -22,7 +22,7 @@ const liveRateReducer = (state: LiveRateState, action: LiveRateAction) => {
       return {
         ...state,
         loading: false,
-        data: {},
+        data: null,
         error: new Error('Failed to fetch live rates'),
       };
     }

@@ -31,4 +31,4 @@ const ExchangeProvider = ({ children }: Props) => {
   );
 };
 
-export { ExchangeProvider };
+export default ExchangeProvider;

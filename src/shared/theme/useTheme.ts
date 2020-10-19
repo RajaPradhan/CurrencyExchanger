@@ -9,7 +9,7 @@ export enum ThemeMode {
 }
 
 const useTheme = () => {
-  const defaultTheme = createMuiTheme({
+  const defaultTheme: Theme = createMuiTheme({
     palette: {
       type: ThemeMode.Light,
       primary: {

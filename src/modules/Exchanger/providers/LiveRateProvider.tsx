@@ -65,6 +65,7 @@ const fetchLiveRate = async (dispatch: LiveRateDispatch) => {
     const liveRate = await fetch(`${API_ENDPOINT}/latest?symbols=USD,GBP`);
     const jsonData = await liveRate.json();
     const payload = { EUR: 1, ...jsonData.rates };
+
     dispatch({
       type: LiveRateActionType.FETCH_LIVE_RATE_SUCCESS,
       payload,
