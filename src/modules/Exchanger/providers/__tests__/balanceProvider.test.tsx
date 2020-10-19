@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -7,7 +7,7 @@ import BalanceConsumer from '../mockConsumers/BalanceConsumer';
 
 describe('Tests for BalanceProvider', () => {
   it('should render consumer with default provider values', () => {
-    const wrapper = ({ children }) => (
+    const wrapper: FC = ({ children }) => (
       <BalanceProvider>{children}</BalanceProvider>
     );
 
@@ -17,7 +17,7 @@ describe('Tests for BalanceProvider', () => {
   });
 
   it('should update source and destination balance on clicking exchange button', () => {
-    const wrapper = ({ children }) => (
+    const wrapper: FC = ({ children }) => (
       <BalanceProvider>{children}</BalanceProvider>
     );
 

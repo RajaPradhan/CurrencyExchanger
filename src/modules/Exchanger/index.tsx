@@ -19,17 +19,17 @@ import {
   updateBalance,
 } from './providers/BalanceProvider';
 
-import ExchangeItem from '../../shared/components/ExchangeItem';
-import CurrencySwitcher from '../../shared/components/CurrencySwitcher';
-import LiveRate from '../../shared/components/LiveRate';
-import { ExchangeItemType } from '../../shared/components/ExchangeItem/types';
-import { themeVariables } from '../../shared/theme';
-import { Currency } from '../../shared/types';
+import ExchangeItem from 'shared/components/ExchangeItem';
+import CurrencySwitcher from 'shared/components/CurrencySwitcher';
+import LiveRate from 'shared/components/LiveRate';
+import { ExchangeItemType } from 'shared/components/ExchangeItem/types';
+import { themeVariables } from 'shared/theme';
+import { Currency } from 'shared/types';
 import {
   calculateExchangeRate,
   calculateExchangeAmount,
   isValidExchange,
-} from '../../shared/utils/exchangeUtils';
+} from 'shared/utils/exchangeUtils';
 
 const useStyles = makeStyles(() => ({
   mainContentContainer: { height: '580px', position: 'relative' },

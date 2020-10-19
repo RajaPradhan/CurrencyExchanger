@@ -4,7 +4,7 @@ import {
   isValidExchange,
   isValidTwoDecimalPlaceNumber,
 } from '../exchangeUtils';
-import { Currency } from '../../types';
+import { Currency } from 'shared/types';
 import { mockLiveRateState, mockSource, mockDestination } from '../mockData';
 
 describe('Tests for exchangeUtils', () => {

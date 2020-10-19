@@ -5,7 +5,7 @@ import {
   BalanceDispatch,
   BalanceActionType,
 } from '../types/balanceTypes';
-import { ExchangeItemType } from '../../../shared/components/ExchangeItem/types';
+import { ExchangeItemType } from 'shared/components/ExchangeItem/types';
 import {
   balanceReducer,
   state as balanceInitialState,

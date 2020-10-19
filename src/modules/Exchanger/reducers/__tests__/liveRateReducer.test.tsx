@@ -76,10 +76,11 @@ describe('Tests for liveRateReducer', () => {
       }),
     );
 
-    await waitFor(() =>
-      expect(result.current[0].error.message).toEqual(
-        'Failed to fetch live rates',
-      ),
-    );
+    await waitFor(() => {
+      const error = result.current[0].error
+        ? result.current[0].error
+        : { message: null };
+      return expect(error.message).toEqual('Failed to fetch live rates');
+    });
   });
 });

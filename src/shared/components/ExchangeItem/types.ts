@@ -1,4 +1,4 @@
-import { Currency } from '../../types/index';
+import { Currency } from 'shared/types';
 
 export type ExchangeItemType = {
   currency: Currency;

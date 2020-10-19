@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { render, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import fetch from 'jest-fetch-mock';
 
 import { LiveRateProvider } from '../LiveRateProvider';
 import LiveRateConsumer from '../mockConsumers/LiveRateConsumer';
-import { mockLiveRateResponse } from '../../../../shared/utils/mockData';
+import { mockLiveRateResponse } from 'shared/utils/mockData';
 
 describe('Tests for LiveRateProvider', () => {
   beforeEach(() => {
@@ -24,7 +24,7 @@ describe('Tests for LiveRateProvider', () => {
   });
 
   it('should render consumer with default provider values', () => {
-    const wrapper = ({ children }) => (
+    const wrapper: FC = ({ children }) => (
       <LiveRateProvider>{children}</LiveRateProvider>
     );
 
@@ -35,7 +35,7 @@ describe('Tests for LiveRateProvider', () => {
   });
 
   it('should update source and destination balance on clicking exchange button', async () => {
-    const wrapper = ({ children }) => (
+    const wrapper: FC = ({ children }) => (
       <LiveRateProvider>{children}</LiveRateProvider>
     );
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
-import { render, Selectors } from '../../../utils/testUtils';
+import { render, Selectors } from 'shared/utils/testUtils';
 import CurrencySwitcher from '../index';
 
 describe('Tests for CurrencySwitcher component', () => {

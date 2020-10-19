@@ -2,8 +2,8 @@ import React from 'react';
 import fetchMock from 'jest-fetch-mock';
 import { waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { render, Selectors } from '../../../shared/utils/testUtils';
-import { mockLiveRateResponse } from '../../../shared/utils/mockData';
+import { render, Selectors } from 'shared/utils/testUtils';
+import { mockLiveRateResponse } from 'shared/utils/mockData';
 import Exchanger from '../index';
 
 describe('Tests for exchange screen', () => {
