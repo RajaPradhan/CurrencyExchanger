@@ -167,6 +167,7 @@ const ExchangeItem = ({
           </InputLabel>
           <Input
             type="text"
+            autoComplete="off"
             placeholder="0"
             autoFocus={type === 'source'}
             className={classes.amountInputField}
