@@ -7,6 +7,7 @@ import {
   Select,
   MenuItem,
   Input,
+  InputLabel,
 } from '@material-ui/core';
 
 import { themeVariables } from '../../theme';
@@ -70,6 +71,9 @@ const useStyles = makeStyles((theme) => ({
   balanceErrorText: {
     color: themeVariables.colors.pink,
   },
+  amountInputLabel: {
+    display: 'none',
+  },
 }));
 
 type Props = {
@@ -90,6 +94,9 @@ const ExchangeItem = ({
   onAmountChange,
 }: Props) => {
   const classes = useStyles({ type });
+
+  const dataTestIdPrefix =
+    type === 'source' ? 'source-exchange-item' : 'destination-exchange-item';
 
   const handleCurrencyChange = ({
     target: { value },
@@ -120,16 +127,25 @@ const ExchangeItem = ({
               value={currency}
               onChange={handleCurrencyChange}
               className={classes.select}
+              data-testid={`${dataTestIdPrefix}-currency-selector`}
             >
-              {Object.values(Currency).map((currency: string) => (
-                <MenuItem
-                  className={classes.menuItem}
-                  value={currency}
-                  key={currency}
-                >
-                  <Typography variant="subtitle1">{currency}</Typography>
-                </MenuItem>
-              ))}
+              {Object.values(Currency).map(
+                (currency: string, index: number) => (
+                  <MenuItem
+                    className={classes.menuItem}
+                    value={currency}
+                    key={currency}
+                    data-testid={`${dataTestIdPrefix}-currency-menuitem-${index}`}
+                  >
+                    <Typography
+                      variant="subtitle1"
+                      data-testid={`${dataTestIdPrefix}-selected-currency-text`}
+                    >
+                      {currency}
+                    </Typography>
+                  </MenuItem>
+                ),
+              )}
             </Select>
           </FormControl>
         </Grid>
@@ -143,6 +159,12 @@ const ExchangeItem = ({
           )}
         </Grid>
         <Grid item className={classes.amountContainer} xs={6}>
+          <InputLabel
+            htmlFor={`${dataTestIdPrefix}-amount-input-field`}
+            className={classes.amountInputLabel}
+          >
+            {`${dataTestIdPrefix}-amount-input-field`}
+          </InputLabel>
           <Input
             type="text"
             placeholder="0"
@@ -150,6 +172,7 @@ const ExchangeItem = ({
             className={classes.amountInputField}
             value={amount === 0 ? '' : amount}
             onChange={handleAmountChange}
+            id={`${dataTestIdPrefix}-amount-input-field`}
           />
         </Grid>
       </Grid>
@@ -162,6 +185,7 @@ const ExchangeItem = ({
                 ? classes.balanceErrorText
                 : classes.balanceText
             }
+            data-testid={`${dataTestIdPrefix}-balance-text`}
           >{`Balance: ${balance} ${CurrencySymbol[currency]}`}</Typography>
         </Grid>
       </Grid>

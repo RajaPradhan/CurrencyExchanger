@@ -37,7 +37,11 @@ const LiveRate = memo(
     return (
       <div className={classes.liveRateContainer}>
         <RateIcon fill={themeVariables.colors.blue} />
-        <Typography variant="body1" className={classes.liveRateText}>
+        <Typography
+          variant="body1"
+          className={classes.liveRateText}
+          data-testid="live-rate"
+        >
           {`1 ${CurrencySymbol[sourceCurrency]} = ${rate} ${CurrencySymbol[destinationCurrency]}`}
         </Typography>
       </div>

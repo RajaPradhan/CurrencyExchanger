@@ -28,7 +28,11 @@ const CurrencySwitcher = ({ onClick }: Props) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.switcherContainer} onClick={onClick}>
+    <div
+      className={classes.switcherContainer}
+      onClick={onClick}
+      data-testid="currency-switcher"
+    >
       <SwitchIcon fill={themeVariables.colors.blue} />
     </div>
   );
