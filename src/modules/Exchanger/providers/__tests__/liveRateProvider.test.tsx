@@ -5,7 +5,7 @@ import fetch from 'jest-fetch-mock';
 
 import { LiveRateProvider } from '../LiveRateProvider';
 import LiveRateConsumer from '../mockConsumers/LiveRateConsumer';
-import { mockLiveRateData } from '../../../../shared/utils/mockData';
+import { mockLiveRateResponse } from '../../../../shared/utils/mockData';
 
 describe('Tests for LiveRateProvider', () => {
   beforeEach(() => {
@@ -14,7 +14,7 @@ describe('Tests for LiveRateProvider', () => {
     fetch.mockIf(/^https?:\/\/api.exchangeratesapi.io.*$/, () => {
       return Promise.resolve({
         status: 200,
-        body: JSON.stringify(mockLiveRateData),
+        body: JSON.stringify(mockLiveRateResponse),
       });
     });
   });

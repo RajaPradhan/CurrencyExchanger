@@ -3,7 +3,7 @@ import fetchMock from 'jest-fetch-mock';
 import { waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { render, Selectors } from '../../../shared/utils/testUtils';
-import { mockLiveRateData } from '../../../shared/utils/mockData';
+import { mockLiveRateResponse } from '../../../shared/utils/mockData';
 import Exchanger from '../index';
 
 describe('Tests for exchange screen', () => {
@@ -12,7 +12,7 @@ describe('Tests for exchange screen', () => {
     fetchMock.mockIf(/^https?:\/\/api.exchangeratesapi.io.*$/, () => {
       return Promise.resolve({
         status: 200,
-        body: JSON.stringify(mockLiveRateData),
+        body: JSON.stringify(mockLiveRateResponse),
       });
     });
   });
