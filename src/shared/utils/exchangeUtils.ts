@@ -2,6 +2,12 @@ import { Currency } from '../types';
 import { ExchangeItemType } from 'shared/components/ExchangeItem/types';
 import { LiveRateData } from 'modules/Exchanger/types/liveRateTypes';
 
+export const MAX_AMOUNT_ALLOWED_TO_EXCHANGE = 999999999.99; // An assumption
+
+export const convertToFixedDecimalPlace = (decimalPlace: number = 2) => (
+  value: number,
+): number => Number(value.toFixed(decimalPlace));
+
 export const isValidTwoDecimalPlaceNumber = (value: number): boolean => {
   const regex = new RegExp(/^\d*\.?\d{0,2}$/);
   return regex.test(value.toString());
@@ -20,7 +26,7 @@ export const calculateExchangeRate = (
   if (!sourceRate || !destinationRate) {
     return -1;
   }
-  return Number((destinationRate / sourceRate).toFixed(2));
+  return convertToFixedDecimalPlace(2)(destinationRate / sourceRate);
 };
 
 export const calculateExchangeAmount = (
@@ -37,7 +43,7 @@ export const calculateExchangeAmount = (
   if (!exchangeRate) {
     return -1;
   }
-  return Number((amount * exchangeRate).toFixed(2));
+  return convertToFixedDecimalPlace(2)(amount * exchangeRate);
 };
 
 export const isValidExchange = (
@@ -57,5 +63,3 @@ export const isValidExchange = (
   }
   return source.amount <= source.balance;
 };
-
-export const MAX_AMOUNT_ALLOWED_TO_EXCHANGE = 99999.99;

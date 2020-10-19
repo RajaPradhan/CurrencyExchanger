@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Grid,
   makeStyles,
@@ -18,16 +18,16 @@ import {
   useBalanceDispatch,
   updateBalance,
 } from './providers/BalanceProvider';
+import useExchanger from './hooks/useExchanger';
 
 import ExchangeItem from 'shared/components/ExchangeItem';
 import CurrencySwitcher from 'shared/components/CurrencySwitcher';
 import LiveRate from 'shared/components/LiveRate';
-import { ExchangeItemType } from 'shared/components/ExchangeItem/types';
+
 import { themeVariables } from 'shared/theme';
-import { Currency } from 'shared/types';
+
 import {
   calculateExchangeRate,
-  calculateExchangeAmount,
   isValidExchange,
 } from 'shared/utils/exchangeUtils';
 
@@ -69,90 +69,24 @@ const Exchanger = () => {
   const balanceContext = useBalanceContext();
   const balanceDispatch = useBalanceDispatch();
 
-  const [source, setSource] = useState<ExchangeItemType>({
-    currency: Currency.EUR,
-    amount: 0,
-    balance: balanceContext.data[Currency.EUR],
+  const {
+    handleCurrencyChange,
+    handleAmountChange,
+    handleCurrencySwitch,
+    handleExchange,
+    source,
+    setSource,
+    destination,
+    setDestination,
+    liveRate,
+    setLiveRate,
+  } = useExchanger({
+    balanceContext,
+    liveRateContext,
+    balanceDispatch,
+    updateBalance,
+    enqueueSnackbar,
   });
-
-  const [destination, setDestination] = useState<ExchangeItemType>({
-    currency: Currency.GBP,
-    amount: 0,
-    balance: balanceContext.data[Currency.GBP],
-  });
-
-  const [liveRate, setLiveRate] = useState<number | undefined>(undefined);
-
-  const handleCurrencyChange = (type: string, currency: Currency) => {
-    if (type === 'source') {
-      setSource({ ...source, currency });
-      setDestination({
-        ...destination,
-        amount: calculateExchangeAmount(
-          currency,
-          destination.currency,
-          liveRateContext.data,
-          source.amount,
-        ),
-      });
-    } else {
-      setDestination({ ...destination, currency });
-      setSource({
-        ...source,
-        amount: calculateExchangeAmount(
-          source.currency,
-          currency,
-          liveRateContext.data,
-          destination.amount,
-        ),
-      });
-    }
-  };
-
-  const handleAmountChange = (type: string, amount: number) => {
-    if (type === 'source') {
-      setSource({ ...source, amount });
-      setDestination({
-        ...destination,
-        amount: calculateExchangeAmount(
-          source.currency,
-          destination.currency,
-          liveRateContext.data,
-          amount,
-        ),
-      });
-    } else {
-      setDestination({ ...destination, amount });
-      setSource({
-        ...source,
-        amount: calculateExchangeAmount(
-          destination.currency,
-          source.currency,
-          liveRateContext.data,
-          amount,
-        ),
-      });
-    }
-  };
-
-  const handleCurrencySwitch = () => {
-    const tmpSource = source;
-    setSource(destination);
-    setDestination(tmpSource);
-  };
-
-  const handleExchange = () => {
-    updateBalance(
-      balanceContext,
-      balanceDispatch,
-      source,
-      destination,
-      liveRate as number,
-      enqueueSnackbar,
-    );
-    setSource({ ...source, amount: 0 });
-    setDestination({ ...destination, amount: 0 });
-  };
 
   useEffect(() => {
     if (liveRateContext.data) {
@@ -174,7 +108,15 @@ const Exchanger = () => {
         balance: balanceContext.data[prevState.currency],
       }));
     }
-  }, [liveRateContext, balanceContext, source.currency, destination.currency]);
+  }, [
+    liveRateContext,
+    balanceContext,
+    source.currency,
+    destination.currency,
+    setSource,
+    setDestination,
+    setLiveRate,
+  ]);
 
   useEffect(() => {
     // fetch rates on first load and then fetch every LIVE_RATE_FETCH_INTERVAL sec

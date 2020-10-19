@@ -3,6 +3,7 @@ import {
   calculateExchangeRate,
   isValidExchange,
   isValidTwoDecimalPlaceNumber,
+  convertToFixedDecimalPlace,
 } from '../exchangeUtils';
 import { Currency } from 'shared/types';
 import { mockLiveRateState, mockSource, mockDestination } from '../mockData';
@@ -82,10 +83,20 @@ describe('Tests for exchangeUtils', () => {
     expect(isValid).toBe(false);
   });
 
-  it('should return test the isValidTwoDecimalPlaceNumber function', () => {
+  it('should test the isValidTwoDecimalPlaceNumber function', () => {
     expect(isValidTwoDecimalPlaceNumber(12.58)).toBe(true);
     expect(isValidTwoDecimalPlaceNumber(34.896)).toBe(false);
     expect(isValidTwoDecimalPlaceNumber(123)).toBe(true);
     expect(isValidTwoDecimalPlaceNumber(NaN)).toBe(false);
+  });
+
+  it('should test the convertToFixedDecimalPlace function', () => {
+    const convertToTwoDecimalPlace = convertToFixedDecimalPlace(2);
+    expect(convertToTwoDecimalPlace(1234.5678)).toBe(1234.57);
+    expect(convertToTwoDecimalPlace(1234.5)).toBe(1234.5);
+
+    const convertToThreeDecimalPlace = convertToFixedDecimalPlace(3);
+    expect(convertToThreeDecimalPlace(1234.5678)).toBe(1234.568);
+    expect(convertToThreeDecimalPlace(1234.5)).toBe(1234.5);
   });
 });
