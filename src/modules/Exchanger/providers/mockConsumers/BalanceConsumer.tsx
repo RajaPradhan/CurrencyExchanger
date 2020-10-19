@@ -5,11 +5,7 @@ import {
   useBalanceDispatch,
   updateBalance,
 } from '../BalanceProvider';
-import {
-  mockSource,
-  mockDestination,
-  liveRate,
-} from '../../../../shared/utils/mockData';
+import { mockSource, mockDestination, liveRate } from 'shared/utils/mockData';
 
 const BalanceConsumer = () => {
   const balanceContext = useBalanceContext();

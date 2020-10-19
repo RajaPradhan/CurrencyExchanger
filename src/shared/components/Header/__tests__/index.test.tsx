@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render } from '../../../utils/testUtils';
+import { render } from 'shared/utils/testUtils';
 import Header from '../index';
 
 describe('Tests for Header component', () => {

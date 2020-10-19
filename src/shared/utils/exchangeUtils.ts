@@ -1,6 +1,6 @@
 import { Currency } from '../types';
-import { ExchangeItemType } from '../components/ExchangeItem/types';
-import { LiveRateData } from '../../modules/Exchanger/types/liveRateTypes';
+import { ExchangeItemType } from 'shared/components/ExchangeItem/types';
+import { LiveRateData } from 'modules/Exchanger/types/liveRateTypes';
 
 export const isValidTwoDecimalPlaceNumber = (value: number): boolean => {
   const regex = new RegExp(/^\d*\.?\d{0,2}$/);

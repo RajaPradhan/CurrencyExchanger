@@ -2,8 +2,8 @@ import React from 'react';
 import { waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { render, Selectors } from '../../../utils/testUtils';
-import { Currency } from '../../../types';
+import { render, Selectors } from 'shared/utils/testUtils';
+import { Currency } from 'shared/types';
 import ExchangeItem from '../index';
 
 describe('Tests for ExchangeItem component', () => {

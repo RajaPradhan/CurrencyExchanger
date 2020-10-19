@@ -76,10 +76,11 @@ describe('Tests for balanceReducer', () => {
       }),
     );
 
-    await waitFor(() =>
-      expect(result.current[0].error.message).toEqual(
-        'Failed to update balance',
-      ),
-    );
+    await waitFor(() => {
+      const error = result.current[0].error
+        ? result.current[0].error
+        : { message: null };
+      return expect(error.message).toEqual('Failed to update balance');
+    });
   });
 });

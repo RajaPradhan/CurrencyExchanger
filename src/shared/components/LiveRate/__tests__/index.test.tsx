@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { render, Selectors } from '../../../utils/testUtils';
-import { Currency } from '../../../types';
+import { render, Selectors } from 'shared/utils/testUtils';
+import { Currency } from 'shared/types';
 import LiveRate from '../index';
 
 describe('Tests for LiveRate component', () => {

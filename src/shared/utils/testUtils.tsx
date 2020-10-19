@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from '@material-ui/core';
 import { render } from '@testing-library/react';
 
-import ExchangeProvider from '../../modules/Exchanger/providers/ExchangeProvider';
+import ExchangeProvider from 'modules/Exchanger/providers/ExchangeProvider';
 import { defaultTheme } from './mockData';
 
 export enum Selectors {

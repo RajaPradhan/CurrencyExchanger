@@ -1,8 +1,8 @@
 import { createMuiTheme, Theme } from '@material-ui/core';
 
-import { ExchangeItemType } from '../components/ExchangeItem/types';
-import { Currency } from '../types';
-import { LiveRateData } from '../../modules/Exchanger/types/liveRateTypes';
+import { ExchangeItemType } from 'shared/components/ExchangeItem/types';
+import { Currency } from 'shared/types';
+import { LiveRateData } from 'modules/Exchanger/types/liveRateTypes';
 
 export const defaultTheme: Theme = createMuiTheme({
   palette: {

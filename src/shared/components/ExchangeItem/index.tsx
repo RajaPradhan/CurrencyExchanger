@@ -10,12 +10,12 @@ import {
   InputLabel,
 } from '@material-ui/core';
 
-import { themeVariables } from '../../theme';
-import { Currency, CurrencySymbol } from '../../types';
+import { themeVariables } from 'shared/theme';
+import { Currency, CurrencySymbol } from 'shared/types';
 import {
   isValidTwoDecimalPlaceNumber,
   MAX_AMOUNT_ALLOWED_TO_EXCHANGE,
-} from '../../utils/exchangeUtils';
+} from 'shared/utils/exchangeUtils';
 
 const useStyles = makeStyles((theme) => ({
   exchangeItemContainer: { padding: '30px 15px' },

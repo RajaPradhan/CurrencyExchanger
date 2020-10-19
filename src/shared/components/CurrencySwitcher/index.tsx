@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core';
 
 import SwitchIcon from './SwitchIcon';
-import { themeVariables } from '../../theme';
+import { themeVariables } from 'shared/theme';
 
 const useStyles = makeStyles(() => ({
   switcherContainer: {

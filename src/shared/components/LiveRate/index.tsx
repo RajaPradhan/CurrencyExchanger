@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 
 import RateIcon from './RateIcon';
-import { themeVariables } from '../../theme';
-import { Currency, CurrencySymbol } from '../../types';
+import { themeVariables } from 'shared/theme';
+import { Currency, CurrencySymbol } from 'shared/types';
 
 const useStyles = makeStyles(() => ({
   liveRateContainer: {
