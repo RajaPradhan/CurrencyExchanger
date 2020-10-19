@@ -10,6 +10,9 @@ import {
   balanceReducer,
   state as balanceInitialState,
 } from '../reducers/balanceReducer';
+import { convertToFixedDecimalPlace } from 'shared/utils/exchangeUtils';
+
+const convertToTwoDecimalPlaces = convertToFixedDecimalPlace(2);
 
 const snackbarOptions = {
   anchorOrigin: { horizontal: 'center', vertical: 'top' },
@@ -67,15 +70,20 @@ const updateBalance = (
   dispatch({ type: BalanceActionType.UPDATE_BALANCE_LOADING });
   try {
     const balanceData = context.data;
-    balanceData[source.currency] -= source.amount; // subtract from source pocket
-    const tmpBalance = Number(
-      (balanceData[destination.currency] + source.amount * liveRate).toFixed(2),
-    ); // add to destination pocket
-    balanceData[destination.currency] = tmpBalance;
+
+    balanceData[source.currency] = convertToTwoDecimalPlaces(
+      balanceData[source.currency] - source.amount,
+    ); // subtract from source balance
+
+    balanceData[destination.currency] = convertToTwoDecimalPlaces(
+      balanceData[destination.currency] + source.amount * liveRate,
+    ); // add to destination balance
+
     dispatch({
       type: BalanceActionType.UPDATE_BALANCE_SUCCESS,
       payload: balanceData,
     });
+
     enqueueSnackbar('Successfully exchanged currency', {
       ...snackbarOptions,
       variant: 'success',
